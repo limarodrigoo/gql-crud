@@ -1,0 +1,23 @@
+type Project {
+  id: ID!
+  title: String!
+  description: String!
+  author: ID!
+}
+
+input UserInput {
+  title: String!
+  description: String!
+  author: ID!
+}
+
+type Query {
+  projects: [Project!]!
+  project(id: ID!): Project!
+}
+
+type Mutation {
+  createProject(data: UserInput!): User!
+  updateProject(id: ID!, data: UserInput!): User!
+  deleteProject(id: ID): Boolean
+}
