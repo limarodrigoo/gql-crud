@@ -23,7 +23,6 @@ const Projects = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Projects",
-      freezeTableName: true
     }
   );
   return Projects;
