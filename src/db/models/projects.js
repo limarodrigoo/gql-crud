@@ -8,24 +8,24 @@ const Projects = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Projects.belongsTo(models.User, {foreignKey: 'userId'})
     }
   }
   Projects.init(
     {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
-      // author: {
-      //   type: DataTypes.INTEGER,
-      //   foreingKey: true,
-      // }
+      userId: {
+        type: DataTypes.INTEGER,
+        foreingKey: true,
+      }
     },
     {
       sequelize,
       modelName: "Projects",
+      freezeTableName: true
     }
   );
-  Projects.belongsTo(Model.User, { foreignKey: "user_id" });
   return Projects;
 };
 

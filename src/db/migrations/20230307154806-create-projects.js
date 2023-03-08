@@ -15,7 +15,7 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      author: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: "CASCADE",

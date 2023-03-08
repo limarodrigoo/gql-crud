@@ -8,7 +8,7 @@ const User = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.Projects, {foreignKey: 'userId'});
     }
   }
   User.init(
@@ -20,9 +20,9 @@ const User = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      freezeTableName: true
     }
   );
-  User.hasMany(Model.Projects);
   return User;
 };
 
