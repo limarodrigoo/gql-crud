@@ -4,9 +4,13 @@ const {
   createNewProject,
   projectUpdate,
   projectDelete,
+  queryUser,
 } = require("./service");
 
 module.exports = {
+  Project: {
+    userData: queryUser,
+  },
   Query: {
     projects: queryProjects,
     project: queryProjectById,

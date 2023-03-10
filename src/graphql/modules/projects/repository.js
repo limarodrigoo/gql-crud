@@ -6,12 +6,14 @@ const findProjectById = (id) => Projects.findByPk(id);
 
 const createProject = (data) => Projects.create(data);
 
-const updateProject = (id, { data }) =>
-  Projects.update(data, {
+const updateProject = async (id, data) => {
+  const result = Projects.update(data, {
     where: {
       id,
     },
   });
+  return result;
+};
 
 const deleteProject = (id) =>
   Projects.destroy({

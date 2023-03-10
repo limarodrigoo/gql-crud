@@ -2,13 +2,13 @@ type Project {
   id: ID!
   title: String!
   description: String!
-  userId: ID!
+  userData: User
 }
 
 input ProjectInput {
   title: String!
   description: String!
-  userId: ID!
+  userData: ID!
 }
 
 type Query {

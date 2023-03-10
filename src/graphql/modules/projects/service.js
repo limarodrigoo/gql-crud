@@ -6,6 +6,8 @@ const {
   deleteProject,
 } = require("./repository");
 
+const { findUserById } = require("../users/repository");
+
 const queryProjects = () => findAllProjects();
 
 const queryProjectById = (_, { id }) => findProjectById(id);
@@ -22,10 +24,16 @@ const projectDelete = async (_, { id }) => {
   return !!deleted;
 };
 
+const queryUser = async ({ dataValues }) => {
+  const { dataValues: result } = await findUserById(dataValues.userId);
+  return result;
+};
+
 module.exports = {
   queryProjects,
   queryProjectById,
   createNewProject,
   projectUpdate,
   projectDelete,
+  queryUser,
 };

@@ -34,7 +34,6 @@ const updateHourRate = async (_, { id, hourRate }) => {
 
 const deleteUser = async (_, { id }) => {
   const deleted = await userDelete(id);
-  console.log(deleted);
   if (deleted) {
     return true;
   }
