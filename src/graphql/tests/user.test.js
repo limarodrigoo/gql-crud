@@ -63,6 +63,7 @@ describe("User sample", function () {
       const response = await updateUser(null, stubUserValue);
       expect(stub.calledOnce).to.be.true;
       expect(response).to.be.false;
+      stub.restore();
     });
   });
   describe("delete user", function () {
