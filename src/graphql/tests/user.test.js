@@ -37,7 +37,7 @@ describe("User sample", function () {
     before(function () {});
     it("should return all users", async function () {
       const stub = sinon.stub(User, "findAll").returns(stubUserValue);
-      const allUsers = queryUsers();
+      const allUsers = await queryUsers();
       expect(stub.calledOnce).to.be.true;
       expect(allUsers).to.equal(stubUserValue);
       stub.restore();

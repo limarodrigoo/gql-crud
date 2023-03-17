@@ -30,36 +30,46 @@ describe("Project sample", function () {
       stub.restore();
     });
   });
-  describe("Query projects", function async() {
-    it("should return all projects", function () {
+  describe("Query projects", function () {
+    it("should return all projects", async function () {
       const stub = sinon.stub(Projects, "findAll").returns(stubProjectValue);
-      const allProjects = queryProjects();
+      const allProjects = await queryProjects();
       expect(stub.calledOnce).to.be.true;
       expect(allProjects).to.be.equal(allProjects);
       stub.restore();
     });
-    it("should return a specific project", function () {
+    it("should return a specific project", async function () {
       const stub = sinon.stub(Projects, "findByPk").returns(stubProjectValue);
-      const projects = queryProjectById(null, { id: stubProjectValue.id });
+      const projects = await queryProjectById(null, {
+        id: stubProjectValue.id,
+      });
+      console.log("projects");
       expect(stub.calledOnce).to.be.true;
       expect(projects).to.be.equal(stubProjectValue);
       stub.restore();
     });
-    describe("Update projects", function async() {
-      it("should return true when succesfull", async function () {
-        const stub = sinon.stub(Projects, "update").returns([1]);
-        const result = await projectUpdate(null, { stubProjectValue });
-        expect(stub.calledOnce).to.be.true;
-        expect(result).to.be.true;
-        stub.restore();
-      });
-      it("should return false when something wents wrong", async function () {
-        const stub = sinon.stub(Projects, "update").returns([0]);
-        const result = await projectUpdate(null, { stubProjectValue });
-        expect(stub.calledOnce).to.be.true;
-        expect(result).to.be.false;
-        stub.restore();
-      });
+    it("if none project was found should return a error message", function () {
+      const stub = sinon.stub(Projects, "findByPk").returns(null);
+      const project = queryProjectById(null, { id: 0 });
+      expect(stub.calledOnce).to.be.true;
+      expect(project.message).to.be.equal("Project not found");
+      stub.restore();
+    });
+  });
+  describe("Update projects", function async() {
+    it("should return true when succesfull", async function () {
+      const stub = sinon.stub(Projects, "update").returns([1]);
+      const result = await projectUpdate(null, { stubProjectValue });
+      expect(stub.calledOnce).to.be.true;
+      expect(result).to.be.true;
+      stub.restore();
+    });
+    it("should return false when something wents wrong", async function () {
+      const stub = sinon.stub(Projects, "update").returns([0]);
+      const result = await projectUpdate(null, { stubProjectValue });
+      expect(stub.calledOnce).to.be.true;
+      expect(result).to.be.false;
+      stub.restore();
     });
   });
 });
