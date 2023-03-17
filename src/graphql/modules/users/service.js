@@ -6,7 +6,13 @@ const {
   userDelete,
 } = require("./repository");
 
-const queryUsers = () => findAllUsers();
+const queryUsers = async () => {
+  const user = await findAllUsers();
+  if (user) {
+    return user;
+  }
+  throw new Error("Users not found");
+};
 
 const queryUserById = async (_, { id }) => {
   const user = await findUserById(id);

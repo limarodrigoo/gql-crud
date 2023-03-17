@@ -8,9 +8,21 @@ const {
 
 const { findUserById } = require("../users/repository");
 
-const queryProjects = () => findAllProjects();
+const queryProjects = async () => {
+  const projects = await findAllProjects();
+  if (projects) {
+    return projects
+  } 
+  throw new Error("Projects not found")
+};
 
-const queryProjectById = (_, { id }) => findProjectById(id);
+const queryProjectById = async (_, { id }) => {
+  const project = await findProjectById(id);
+  if (project) {
+    return project;
+  }
+  throw new Error("Project not found");
+};
 
 const createNewProject = (_, { data }) => createProject(data);
 
